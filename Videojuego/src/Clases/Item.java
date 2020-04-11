@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 public class Item extends ObjetoJuego{
 	private int cantidadVidas;
 	private boolean capturado=false;
+	private int tipoItem;
 
 	public boolean isCapturado() {
 		return capturado;
@@ -22,8 +23,13 @@ public class Item extends ObjetoJuego{
 	public Item(int velocidad, int x, int y, String nombreImagen, int cantidadVidas) {
 		super(velocidad, x, y, nombreImagen);
 		this.cantidadVidas= cantidadVidas;
-		this.ancho=(int)Juego.imagenes.get("coin").getWidth();
-		this.alto=(int)Juego.imagenes.get("coin").getHeight();
+		this.ancho=(int)Juego.imagenes.get(nombreImagen).getWidth();
+		this.alto=(int)Juego.imagenes.get(nombreImagen).getHeight();
+	//	switch(tipoTile) {
+		//case 1:
+			//this.xImagen=183;
+		//	this.yImagen=0;
+			//break;
 	}
 
 	
@@ -36,14 +42,16 @@ public class Item extends ObjetoJuego{
 		this.cantidadVidas = cantidadVidas;
 	}
 
+	public void obtenerTamaño() {
+		
+	}
 
 	public void pintar(GraphicsContext graficos) {
 		if (this.capturado)
 			return;
 		else {
 		graficos.drawImage(Juego.imagenes.get(nombreImagen), x, y);
-		graficos.setStroke(Color.RED);
-		graficos.strokeRect(x, y, ancho, alto);
+		
 		}
 	}
 	
