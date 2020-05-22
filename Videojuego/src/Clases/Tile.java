@@ -11,12 +11,14 @@ public class Tile extends ObjetoJuego {
 	private int xImagen;
 	private int yImagen;
 	private int tipoTile;
+	
 	public Tile( int tipoTile, int velocidad, int x, int y, String nombreImagen, int ancho, int alto) {
 		super(velocidad, x, y, nombreImagen);
 		this.alto=alto;
 		this.ancho=ancho;
+		this.setTipoTile(tipoTile);
 		
-		switch(tipoTile) {
+		switch(this.getTipoTile()) {
 		case 1:
 			this.xImagen=183;
 			this.yImagen=0;
@@ -633,37 +635,55 @@ public class Tile extends ObjetoJuego {
 	}
 	
 	public Rectangle obtenerRectangulo() {
-		if(tipoTile==1 || tipoTile==2 || 
-				tipoTile==3 || tipoTile==4 || 
-				tipoTile==5 || tipoTile==6 || 
-				tipoTile==7 || tipoTile==8 || 
-				tipoTile==9 || tipoTile==10 || 
-				tipoTile==11 || tipoTile==12 || 
-				tipoTile==13 || tipoTile==14 || 
-				tipoTile==15 || tipoTile==16 || 
-				tipoTile==17 || tipoTile==18 || 
-				tipoTile==19 || tipoTile==23 || 
-				tipoTile==75 || tipoTile==76 || 
-				tipoTile==79 || tipoTile==80 || 
-				tipoTile==81 || tipoTile==82 || 
-				tipoTile==83 || tipoTile==84 || 
-				tipoTile==85 || tipoTile==86 || 
-				tipoTile==87 || tipoTile==88 || 
-				tipoTile==89 || tipoTile==90 || 
-				tipoTile==91 || tipoTile==92 || 
-				tipoTile==93 || tipoTile==94 || 
-				tipoTile==101 || tipoTile==102 || 
-				tipoTile==114 || tipoTile==115) {
-			return new Rectangle(this.x,this.y, ancho, alto);
-		}
-			else {
-				return new Rectangle(0, 0, 0, 0);
+		if(getTipoTile()==21 || getTipoTile()==24||getTipoTile()==22||getTipoTile()==20||getTipoTile()==25||getTipoTile()==26||getTipoTile()==27||getTipoTile()==28
+				||getTipoTile()==29||getTipoTile()==30||getTipoTile()==31||getTipoTile()==32||getTipoTile()==33||getTipoTile()==34||getTipoTile()==35||getTipoTile()==36
+				||getTipoTile()==37||getTipoTile()==38||getTipoTile()==39||getTipoTile()==40||getTipoTile()==41||getTipoTile()==42||getTipoTile()==43
+				||getTipoTile()==44||getTipoTile()==45||getTipoTile()==46||getTipoTile()==47||getTipoTile()==48||getTipoTile()==49||getTipoTile()==50
+				||getTipoTile()==51||getTipoTile()==52||getTipoTile()==53||getTipoTile()==54||getTipoTile()==55||getTipoTile()==56||getTipoTile()==57
+				||getTipoTile()==58||getTipoTile()==59||getTipoTile()==60||getTipoTile()==61||getTipoTile()==105||getTipoTile()==106||getTipoTile()==107
+				||getTipoTile()==108||getTipoTile()==112||getTipoTile()==111||getTipoTile()==110||getTipoTile()==109||getTipoTile()==64||getTipoTile()==66
+				||getTipoTile()==67||getTipoTile()==65||getTipoTile()==70||getTipoTile()==62||getTipoTile()==63||getTipoTile()==71||getTipoTile()==68
+				||getTipoTile()==72||getTipoTile()==69||getTipoTile()==95||getTipoTile()==96||getTipoTile()==97||getTipoTile()==98||getTipoTile()==99
+				||getTipoTile()==100||getTipoTile()==101||getTipoTile()==102||getTipoTile()==103||getTipoTile()==104
+				||getTipoTile()==113||getTipoTile()==116||getTipoTile()==117||getTipoTile()==118||getTipoTile()==119||getTipoTile()==120||getTipoTile()==121
+				||getTipoTile()==122) {
+			return new Rectangle(this.x,this.y, 70, 70);
+			}
+	
+		
+		else {
+			return new Rectangle(0, 0, 0, 0);
 		}	
 	}
 	
+	
+	public int getTipoTile() {
+		return tipoTile;
+	}
+
+	public void setTipoTile(int tipoTile) {
+		this.tipoTile = tipoTile;
+	}
+
 	public void verificarColisionobstaculo(Jugador jugador) {
-		if(this.obtenerRectangulo().getBoundsInLocal().intersects(jugador.obtenerRectangulo().getBoundsInLocal()))
+		if(this.obtenerRectangulo().intersects(jugador.obtenerRectangulo().getBoundsInLocal())&&(tipoTile==21||tipoTile==24||tipoTile==22||tipoTile==20
+				||tipoTile==25||tipoTile==26||tipoTile==27||tipoTile==28||tipoTile==29||tipoTile==30
+				||tipoTile==31||tipoTile==37||tipoTile==43||tipoTile==49||tipoTile==55||tipoTile==61
+				||tipoTile==32||tipoTile==38||tipoTile==44||tipoTile==50||tipoTile==56||tipoTile==62
+				||tipoTile==33||tipoTile==39||tipoTile==45||tipoTile==51||tipoTile==57||tipoTile==63
+				||tipoTile==34||tipoTile==40||tipoTile==46||tipoTile==52||tipoTile==58||tipoTile==64
+				||tipoTile==35||tipoTile==41||tipoTile==47||tipoTile==53||tipoTile==59||tipoTile==65
+				||tipoTile==36||tipoTile==42||tipoTile==48||tipoTile==54||tipoTile==60||tipoTile==66
+				||tipoTile==67||tipoTile==95||tipoTile==101||tipoTile==107||tipoTile==113||tipoTile==120
+				||tipoTile==68||tipoTile==96||tipoTile==102||tipoTile==108||tipoTile==116||tipoTile==121
+				||tipoTile==69||tipoTile==97||tipoTile==103||tipoTile==109||tipoTile==117||tipoTile==122
+				||tipoTile==70||tipoTile==98||tipoTile==104||tipoTile==110||tipoTile==118||tipoTile==112
+				||tipoTile==71||tipoTile==99||tipoTile==105||tipoTile==111||tipoTile==119||tipoTile==106
+				||tipoTile==72||tipoTile==100)) {
 			System.out.print("si");
+		}
+	
+		
 	}
 	
 	public boolean verificarColisionPaso(Jugador jugador) {

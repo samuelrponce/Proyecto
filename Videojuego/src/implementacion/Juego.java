@@ -3,8 +3,7 @@ package implementacion;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
+import Clases.Disparo;
 import Clases.Fondo;
 import Clases.Item;
 import Clases.Jugador;
@@ -28,6 +27,7 @@ public class Juego extends Application {
 	private Fondo fondo;
 	private Jugador jugador;
 	private Item item;
+	private Disparo disparo;
 	public static boolean arriba;
 	public static boolean abajo;
 	public static boolean izquierda;
@@ -39,6 +39,63 @@ public class Juego extends Application {
 	//private int items[][]= {
 			//{4  ,6  ,62 ,4  ,21 ,5  ,20 ,6  ,37 ,37 },
 	//};
+	
+	private int pasoLibre[][]= {
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{113,116,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{117,118,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{119,120,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{121,122,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{113,116,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{117,118,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{119,120,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{121,122,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{113,116,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{117,118,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{119,120,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{121,122,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,113,116},
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,117,118},
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,119,120},
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,121,122},
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+	};
 	
 	private ArrayList<Tile> tiles;
 	
@@ -152,7 +209,7 @@ public class Juego extends Application {
 			{65 ,64 ,62 ,63 ,62 ,115,62 ,63 ,62 ,63 },
 			{63 ,62 ,74 ,114,114,75 ,114,114,77 ,62 },
 			{62 ,63 ,70 ,72 ,72 ,115,72 ,72 ,71 ,62 },
-			{65 ,63 ,62 ,62 ,62 ,73 ,62 ,64 ,62 ,64 },
+			{65 ,63 ,62 ,21 ,24 ,73 ,62 ,64 ,62 ,64 },
 			{62 ,63 ,62 ,63 ,62 ,62 ,62 ,63 ,62 ,63 },
 			};
 	
@@ -190,9 +247,10 @@ public class Juego extends Application {
 	
 	public void ActualizarEstado(double t){
 		jugador.verificarColisionesItem(item);
-		
 		jugador.calcularFrame(t);
 		jugador.mover();
+		disparo.mover();
+		
 		for(int i=0;i<tiles.size();i++)
 			tiles.get(i).verificarColisionobstaculo(jugador);
 		
@@ -202,6 +260,7 @@ public class Juego extends Application {
 		imagenes = new HashMap<String, Image>();
 		cargarImagenes();
 		jugador = new Jugador(1,385,346,"jugador",0,"reposo");
+		disparo= new Disparo(3,50,50,"disparo",0,0);
 		fondo = new Fondo(3,0,0,"back","back2");
 		inicializarTiles();	
 		item = new Item(0,400,500,"coin",2);
@@ -231,19 +290,27 @@ public class Juego extends Application {
 				if(tilemap[i][j]!=0) 
 					this.tiles.add(new Tile(tilemap[i][j],3, j*77, i*77-3465,"tilemap", 77, 77));
 			        this.tiles.add(new Tile(arboles[i][j],3, j*77, (i*77)-3465,"tilemap", 77, 77));
+			       
+			        
+			        
 			}
 		}
+		
 	}
+	
+	
 	
 
 	
 	public void cargarImagenes() {
 		imagenes.put("jugador1",new Image("jugador1.png"));
+		imagenes.put("paso",new Image("paso libre.png"));
 		imagenes.put("back",new Image("back.png"));
 		imagenes.put("back2",new Image("back2.png"));
 		imagenes.put("tilemap",new Image("tilemapx1.png"));
 		imagenes.put("jugador",new Image("sprite3.png"));
 		imagenes.put("coin",new Image("Silver_5.png"));
+		imagenes.put("disparo",new Image("rasengan.png"));
 	}
 	
 	public void pintar () {	
@@ -252,6 +319,9 @@ public class Juego extends Application {
 		//tile.pintar(graficos);
 		for(int i=0;i< tiles.size();i++)
 			tiles.get(i).pintar(graficos);
+		
+		if(Juego.space==true)
+			disparo.pintar(graficos);
 		
 		jugador.pintar(graficos);
 		item.pintar(graficos);
@@ -264,21 +334,17 @@ public class Juego extends Application {
 			@Override
 			public void handle(KeyEvent evento) {
 				switch(evento.getCode().toString()) {
+			
 				case "RIGHT":
 						derecha=true;
-						jugador.setDireccion(1);
-					
-						jugador.setAnimacionActual("correr");
+						jugador.setAnimacionActual("correrDerecha");
 					break;
 				case "LEFT":
 						izquierda=true;
-						jugador.setDireccion(-1);
-					
-						jugador.setAnimacionActual("correr");
+						jugador.setAnimacionActual("correrIzquierda");
 					break;
 				case "UP":
 						arriba=true;
-					
 						jugador.setAnimacionActual("correrArriba");
 					break;
 				case "DOWN":
@@ -290,8 +356,7 @@ public class Juego extends Application {
 						jugador.setAnimacionActual("ataque");
 					break;
 				}
-			}
-			
+			}		
 		});
 		
 		escena.setOnKeyReleased(new EventHandler<KeyEvent>(){
@@ -315,9 +380,13 @@ public class Juego extends Application {
 							jugador.setAnimacionActual("reposo");
 						break;
 					case "SPACE":
-							space=false;
-							jugador.setAnimacionActual("reposo");
-						break;
+						
+							disparo.setX(jugador.obtenerxImagen());
+							disparo.setY(jugador.obteneryImagen());
+						
+						jugador.setAnimacionActual("reposo");
+					break;
+					
 				}
 			}
 		});
