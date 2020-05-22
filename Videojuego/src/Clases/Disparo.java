@@ -34,13 +34,15 @@ public class Disparo  {
 	
 	public void pintar(GraphicsContext graficos) {
 		
-		if(y>0) {
 		graficos.drawImage(Juego.imagenes.get(nombreImagen), x,y, anchoImagen,anchoImagen);	
-		}
-		else {
-		Juego.space=false;
 		
+	}
+	
+	public boolean pintar1() {
+		if (y<0) {
+			return false;
 		}
+		return true;
 	}
 
 	public void mover() {

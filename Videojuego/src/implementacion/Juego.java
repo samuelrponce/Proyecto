@@ -320,7 +320,7 @@ public class Juego extends Application {
 		for(int i=0;i< tiles.size();i++)
 			tiles.get(i).pintar(graficos);
 		
-		if(Juego.space==true)
+		if(Juego.space==true||disparo.pintar1()==true)
 			disparo.pintar(graficos);
 		
 		jugador.pintar(graficos);
@@ -380,7 +380,7 @@ public class Juego extends Application {
 							jugador.setAnimacionActual("reposo");
 						break;
 					case "SPACE":
-						
+						space=false;
 							disparo.setX(jugador.obtenerxImagen());
 							disparo.setY(jugador.obteneryImagen());
 						
