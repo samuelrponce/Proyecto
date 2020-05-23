@@ -38,7 +38,7 @@ public class Disparo  {
 		
 	}
 	
-	public boolean pintar1() {
+	public boolean limiteDisparo() {
 		if (y<0) {
 			return false;
 		}

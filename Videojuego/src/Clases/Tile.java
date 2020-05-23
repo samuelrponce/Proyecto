@@ -686,14 +686,7 @@ public class Tile extends ObjetoJuego {
 		
 	}
 	
-	public boolean verificarColisionPaso(Jugador jugador) {
-		if(obtenerRectangulo().intersects(jugador.obtenerRectangulo().getBoundsInLocal()))
-		{
-			
-		}
-		
-		return true;
-	}
+	
 	
 	public int getxImagen() {
 		return xImagen;

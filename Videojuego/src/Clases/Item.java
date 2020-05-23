@@ -10,14 +10,7 @@ public class Item extends ObjetoJuego{
 	private boolean capturado=false;
 	private int tipoItem;
 
-	public boolean isCapturado() {
-		return capturado;
-	}
-
-
-	public void setCapturado(boolean capturado) {
-		this.capturado = capturado;
-	}
+	
 
 
 	public Item(int velocidad, int x, int y, String nombreImagen, int cantidadVidas) {
@@ -31,7 +24,15 @@ public class Item extends ObjetoJuego{
 		//	this.yImagen=0;
 			//break;
 	}
+	
+public boolean isCapturado() {
+		return capturado;
+	}
 
+
+	public void setCapturado(boolean capturado) {
+		this.capturado = capturado;
+	}
 	
 	public int getCantidadVidas() {
 		return cantidadVidas;
@@ -42,9 +43,7 @@ public class Item extends ObjetoJuego{
 		this.cantidadVidas = cantidadVidas;
 	}
 
-	public void obtenerTamaño() {
-		
-	}
+
 
 	public void pintar(GraphicsContext graficos) {
 		if (this.capturado)

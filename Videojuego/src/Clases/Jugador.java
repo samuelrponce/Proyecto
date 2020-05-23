@@ -18,7 +18,16 @@ public class Jugador extends ObjetoJuego{
 	private String animacionActual;
 	private int direccion=1;
 	private int multiplicador=1;
+	private int puntuacion;
 	
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
 	public int getMultiplicador() {
 		return multiplicador;
 	}
@@ -27,8 +36,9 @@ public class Jugador extends ObjetoJuego{
 		this.multiplicador = multiplicador;
 	}
 
-	public Jugador(int velocidad, int x, int y, String nombreImagen, int vidas,String animacionActual) {
+	public Jugador(int velocidad, int x, int y, String nombreImagen, int vidas,String animacionActual,int puntuacion) {
 		super(velocidad, x, y, nombreImagen);
+		this.puntuacion=puntuacion;
 		this.vidas = vidas;
 		this.animacionActual=animacionActual;
 		animaciones = new HashMap<String, Animacion>();
@@ -197,13 +207,7 @@ public class Jugador extends ObjetoJuego{
 		
 	
 	
-	public void verificarColisionesItem(Item item) {
-		if (!item.isCapturado() && this.obtenerRectangulo().getBoundsInLocal().intersects(item.obtenerRectangulo().getBoundsInLocal())){
-			this.vidas += item.getCantidadVidas();
-			System.out.println("colision");
-			item.setCapturado(true);
-		}
-	}
+	
 	
 
 	
