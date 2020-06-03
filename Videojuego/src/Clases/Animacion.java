@@ -1,6 +1,5 @@
 package Clases;
 
-import java.util.ArrayList;
 
 import javafx.scene.shape.Rectangle;
 

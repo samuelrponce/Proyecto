@@ -2,41 +2,51 @@ package implementacion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 import Clases.Disparo;
-import Clases.Fondo;
-import Clases.Item;
+import Clases.Enemigo1;
+import Clases.Enemigo2;
+import Clases.Enemigo3;
 import Clases.Items;
 import Clases.Jugador;
 import Clases.Tile;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Juego extends Application {
 	private GraphicsContext graficos;
 	private Group root;
 	private Scene escena;
 	private Canvas lienzo;
-	private Fondo fondo;
+	//private Fondo fondo;
 	private Jugador jugador;
-	
 	private Disparo disparo;
 	public static boolean arriba;
 	public static boolean abajo;
 	public static boolean izquierda;
 	public static boolean derecha;
 	public static boolean space;
+	public static int coordenadaX;
+	public static int coordenadaY;
+	private Enemigo1 enemigo1;
+	private Enemigo2 enemigo2;
+	private Enemigo3 enemigo3;
 	public static HashMap<String, Image>imagenes;
 	private ArrayList<Items> item;
-	
 	private int items[][]= {
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
@@ -90,14 +100,11 @@ public class Juego extends Application {
 			{1  ,2  ,3  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
-			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,1  ,2  ,3  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 	};
 	
-	
-	
 	private ArrayList<Tile> tiles;
-	
 	private int arboles[][]= {
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
@@ -136,11 +143,11 @@ public class Juego extends Application {
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
-			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{113,116,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{117,118,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{119,120,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{121,122,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
+			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
 			{0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  },
@@ -214,18 +221,17 @@ public class Juego extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-
 	}
 
 	@Override
 	public void start(Stage ventana) throws Exception {
+			
 			InicializarComponentes();
 			GestionEventos();
 			ventana.setScene(escena);
 			ventana.setTitle("Sobreviviente");
 			ventana.show();
 			cicloJuego();
-		
 	}
 	
 	public void cicloJuego() {
@@ -238,36 +244,76 @@ public class Juego extends Application {
 				ActualizarEstado(t);
 				pintar();
 			}
-			
 		};
-		
 		animationTimer.start();
 	}
 	
 	public void ActualizarEstado(double t){
-		
-		
+		if (jugador.getVidas()==1) {
+			jugador.setAnimacionActual("muerte");
+		}
+//		if (jugador.getAnimacionActual()=="muerte") {
+//			TextInputDialog tid = new TextInputDialog();
+//			tid.setHeaderText(null);
+//			tid.setTitle("Insertar");
+//			tid.setContentText("Introduce un valor");
+//			Optional<String> texto = Platform.runLater(tid::showAndWait);
+//			System.out.print(texto.get());
+//			
+//			Alert dialogoAlerta=new Alert(AlertType.INFORMATION);
+//			dialogoAlerta.setTitle("Puntuaciones");
+//			dialogoAlerta.setHeaderText(null);
+//			dialogoAlerta.setContentText(texto.get());
+//			dialogoAlerta.initStyle(StageStyle.UTILITY);
+//			Platform.runLater(dialogoAlerta::showAndWait);
+//		}
 		
 		jugador.calcularFrame(t);
-		jugador.mover();
-		disparo.mover();
 		
+		jugador.mover();
+		
+		enemigo1.calcularFrame(t);
+		enemigo1.mover();
+		enemigo1.verificarColisionJugador(jugador);
+		
+		enemigo2.calcularFrame(t);
+		enemigo2.mover();
+		enemigo2.verificarColisionJugador(jugador);
+		
+		enemigo3.calcularFrame(t);
+		enemigo3.mover();
+		enemigo3.verificarColisionJugador(jugador);
+		
+		disparo.verificarColision(enemigo1, enemigo2, enemigo3, jugador);
+		disparo.mover();
 		for(int i=0;i<tiles.size();i++)
 			tiles.get(i).verificarColisionobstaculo(jugador);
 		
 		for(int i=0;i<item.size();i++)
 			item.get(i).verificarColisionesItem(jugador);
 		
+		
+		
+		 coordenadaX=jugador.getX();
+		 coordenadaY=jugador.getY();
+		 
+		 
 	}
 	
+	
 	public void InicializarComponentes() {
+		
 		imagenes = new HashMap<String, Image>();
 		cargarImagenes();
 		jugador = new Jugador(1,385,346,"jugador",0,"reposo",0);
-		disparo= new Disparo(3,50,50,"disparo",0,0);
-		fondo = new Fondo(3,0,0,"back","back2");
+		enemigo1=new Enemigo1(1,1, 456, -800,"jugador", "reposo", 1);
+		enemigo2=new Enemigo2(1,1, 870, -900,"jugador", "reposo", 1);
+		enemigo3=new Enemigo3(1,1, 100, -1200,"jugador", "reposo", 1);
+		disparo= new Disparo(6,50,50,"disparo",800000,0);
+		//fondo = new Fondo(3,0,0,"back","back2");
 		inicializarTiles();	
 		inicializarItems();
+		
 		//item = new Item(0,400,500,"coin",2);
 		//tile = new Tile(0,0,0,"tilemap",512,832,96,96);
 		root = new Group();
@@ -277,9 +323,12 @@ public class Juego extends Application {
 		graficos = lienzo.getGraphicsContext2D();
 	}
 	
+	
+	
+	
+	
 	public void inicializarItems() {
 		item= new ArrayList<Items>();
-		
 		for (int i=0; i<items.length;i++) {
 			for(int j=0;j<items[i].length;j++) {
 				if(items[i][j]!=0)
@@ -294,17 +343,10 @@ public class Juego extends Application {
 			for(int j=0;j<tilemap[i].length;j++) {
 				if(tilemap[i][j]!=0) 
 					this.tiles.add(new Tile(tilemap[i][j],3, j*77, i*77-3465,"tilemap", 77, 77));
-			        this.tiles.add(new Tile(arboles[i][j],3, j*77, (i*77)-3465,"tilemap", 77, 77));
-			        
-			        
+			        this.tiles.add(new Tile(arboles[i][j],3, j*77, i*77-3465,"tilemap", 77, 77));
 			}
 		}
-		
 	}
-	
-	
-	
-
 	
 	public void cargarImagenes() {
 		imagenes.put("jugador1",new Image("jugador1.png"));
@@ -319,26 +361,29 @@ public class Juego extends Application {
 	}
 	
 	public void pintar () {	
-		
 		//fondo.pintar(graficos);
 		//tile.pintar(graficos);
 		for(int i=0;i< tiles.size();i++)
 			tiles.get(i).pintar(graficos);
 		
-		
-		if(Juego.space==true||disparo.limiteDisparo()==true)
+		if(Juego.space==true||disparo.limiteDisparo()==true||disparo.isColision()==false)
 			disparo.pintar(graficos);
 		
 		for(int i=0;i< item.size();i++)
 			item.get(i).pintar(graficos);
 		
+		
+		enemigo1.pintar(graficos);
+		enemigo2.pintar(graficos);
+		enemigo3.pintar(graficos);
 		jugador.pintar(graficos);
 		graficos.fillText("Vidas:" + jugador.getVidas(), 20, 20);
+		graficos.fillText("Score:" + jugador.getPuntuacion(), 20, 40);
 	}
+	
 	
 	public void GestionEventos(){
 		escena.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent evento) {
 				switch(evento.getCode().toString()) {
@@ -372,7 +417,6 @@ public class Juego extends Application {
 				switch(evento.getCode().toString()){
 					case "RIGHT":
 							derecha=false;
-						
 							jugador.setAnimacionActual("reposo");
 						break;
 					case "LEFT":
@@ -391,10 +435,8 @@ public class Juego extends Application {
 						space=false;
 							disparo.setX(jugador.obtenerxImagen());
 							disparo.setY(jugador.obteneryImagen());
-						
 						jugador.setAnimacionActual("reposo");
 					break;
-					
 				}
 			}
 		});

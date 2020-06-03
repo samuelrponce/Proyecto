@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import implementacion.Juego;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Jugador extends ObjetoJuego{
@@ -154,7 +153,7 @@ public class Jugador extends ObjetoJuego{
 				new Rectangle(892,406,68,58),				
 		};
 		Animacion animacionMuerte =new Animacion(0.05, coordenadasMuerte);
-		animaciones.put("auerte", animacionMuerte);
+		animaciones.put("muerte", animacionMuerte);
 		
 	}
 	
@@ -190,6 +189,7 @@ public class Jugador extends ObjetoJuego{
 	
 	public void mover( ) {
 		
+			
 			if (Juego.derecha)
 				x+=velocidad;
 			
@@ -200,12 +200,26 @@ public class Jugador extends ObjetoJuego{
 				y+=velocidad;
 
 			if (Juego.arriba)
-				y-=velocidad;
+				y-=velocidad-1;
 			
+			if (y>634) 
+				y=634;
+			
+			if (y<0)
+				y=0;
+			
+			if(x>714)
+				x=714;
+			
+			if(x<0)
+				x=0;
+		
 		}
 		
 		
-	
+	public void verificarColisionesEnemigo1() {
+		
+	}
 	
 	
 	

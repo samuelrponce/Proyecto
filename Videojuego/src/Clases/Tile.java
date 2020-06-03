@@ -1,10 +1,9 @@
 package Clases;
 
-import java.util.ArrayList;
+
 
 import implementacion.Juego;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends ObjetoJuego {
@@ -680,6 +679,38 @@ public class Tile extends ObjetoJuego {
 				||tipoTile==70||tipoTile==98||tipoTile==104||tipoTile==110||tipoTile==118||tipoTile==112
 				||tipoTile==71||tipoTile==99||tipoTile==105||tipoTile==111||tipoTile==119||tipoTile==106
 				||tipoTile==72||tipoTile==100)) {
+			
+				if(obtenerRectangulo().getBoundsInLocal().intersects(jugador.obtenerRectangulo().getBoundsInLocal())) {
+					if (jugador.obtenerRectangulo().getX()>obtenerRectangulo().getX() && jugador.obtenerRectangulo().getY()>obtenerRectangulo().getY()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()+3);
+						jugador.setY((int)jugador.obtenerRectangulo().getY()+12);
+					}
+					if (jugador.obtenerRectangulo().getX()>obtenerRectangulo().getX() && jugador.obtenerRectangulo().getY()<obtenerRectangulo().getY()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()+3);
+						jugador.setY((int)jugador.obtenerRectangulo().getY());
+					}
+					if (jugador.obtenerRectangulo().getX()<obtenerRectangulo().getX() && jugador.obtenerRectangulo().getY()>obtenerRectangulo().getY()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()-3);
+						jugador.setY((int)jugador.obtenerRectangulo().getY()+12);
+					}
+					if (jugador.obtenerRectangulo().getX()<obtenerRectangulo().getX() && jugador.obtenerRectangulo().getY()<obtenerRectangulo().getY()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()-3);
+						jugador.setY((int)jugador.obtenerRectangulo().getY());
+					}
+					if (jugador.obtenerRectangulo().getX()>=obtenerRectangulo().getX()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()+3);
+					}
+					if (jugador.obtenerRectangulo().getX()<=obtenerRectangulo().getX()) {
+						jugador.setX((int)jugador.obtenerRectangulo().getX()-3);
+					}
+					if (jugador.obtenerRectangulo().getY()>=obtenerRectangulo().getY()) {
+						jugador.setY((int)jugador.obtenerRectangulo().getY()+12);
+					}
+					if (jugador.obtenerRectangulo().getY()<=obtenerRectangulo().getY()) {
+						jugador.setY((int)jugador.obtenerRectangulo().getY());
+					}
+				}
+			
 			System.out.print("si");
 		}
 	
