@@ -92,30 +92,8 @@ public class Enemigo2 extends ObjetoJuego {
 				};
 				Animacion animacionCorrerAbajo =new Animacion(0.03, coordenadasCorrerAbajo);
 				animaciones.put("correrAbajo", animacionCorrerAbajo);
-				
-		//ataque
-				Rectangle coordenadasAtaque[]= {
-						new Rectangle(11,326,68,55),
-						new Rectangle(93,326,68,52),
-						new Rectangle(169,326,68,53),
-						new Rectangle(253,329,65,57),
-						new Rectangle(332,328,66,57),
-						new Rectangle(411,328,66,58),			
-				};
-				Animacion animacionAtaque =new Animacion(0.03, coordenadasAtaque);
-				animaciones.put("ataque", animacionAtaque);
-				
-		//muerte
-				Rectangle coordenadasMuerte[]= {
-						new Rectangle(491,407,67,58),
-						new Rectangle(571,407,67,58),
-						new Rectangle(651,406,68,58),
-						new Rectangle(731,407,68,58),
-						new Rectangle(811,407,67,58),
-						new Rectangle(892,406,68,58),				
-				};
-				Animacion animacionMuerte =new Animacion(0.03, coordenadasMuerte);
-				animaciones.put("auerte", animacionMuerte);
+	
+	
 				
 			}
 	
@@ -215,6 +193,7 @@ public class Enemigo2 extends ObjetoJuego {
 
 	@Override
 	public void pintar(GraphicsContext graficos) {
+		
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen, yImagen, anchoImagen, altoImagen, x, y, anchoImagen,anchoImagen);		
 		
 	}
@@ -239,7 +218,7 @@ public class Enemigo2 extends ObjetoJuego {
 	
 	public void verificarColisionJugador(Jugador jugador) {
 		if (obtenerRectangulo().getBoundsInLocal().intersects(jugador.obtenerRectangulo().getBoundsInLocal()) ) {
-			jugador.setVidas(jugador.getVidas()-1);
+			jugador.setVidas(jugador.getVidas()-2);
 			setColision(true);
 			this.y=y-900;
 			 

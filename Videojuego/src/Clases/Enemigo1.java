@@ -95,29 +95,18 @@ public class Enemigo1 extends ObjetoJuego {
 				
 		//ataque
 				Rectangle coordenadasAtaque[]= {
-						new Rectangle(11,326,68,55),
-						new Rectangle(93,326,68,52),
-						new Rectangle(169,326,68,53),
-						new Rectangle(253,329,65,57),
-						new Rectangle(332,328,66,57),
-						new Rectangle(411,328,66,58),			
+						new Rectangle(8,323,70,55),
+						new Rectangle(89,323,68,52),
+						new Rectangle(164,337,68,53),
+						new Rectangle(244,337,65,57),
+						new Rectangle(324,337,66,57),
+						new Rectangle(403,337,66,58),			
 				};
+			
 				Animacion animacionAtaque =new Animacion(0.03, coordenadasAtaque);
 				animaciones.put("ataque", animacionAtaque);
-				
-		//muerte
-				Rectangle coordenadasMuerte[]= {
-						new Rectangle(491,407,67,58),
-						new Rectangle(571,407,67,58),
-						new Rectangle(651,406,68,58),
-						new Rectangle(731,407,68,58),
-						new Rectangle(811,407,67,58),
-						new Rectangle(892,406,68,58),				
-				};
-				Animacion animacionMuerte =new Animacion(0.03, coordenadasMuerte);
-				animaciones.put("auerte", animacionMuerte);
-				
-			}
+	}
+	
 	
 	public void calcularFrame(double t) {
 		Rectangle coordenadas=animaciones.get(animacionActual).calcularFrameActual(t);
@@ -215,6 +204,7 @@ public class Enemigo1 extends ObjetoJuego {
 
 	@Override
 	public void pintar(GraphicsContext graficos) {
+		
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen, yImagen, anchoImagen, altoImagen, x, y, anchoImagen,anchoImagen);		
 		
 	}
@@ -223,10 +213,11 @@ public class Enemigo1 extends ObjetoJuego {
 	public void mover( ) {
 		if(x>Juego.coordenadaX) {
 			x-=1;
-			setAnimacionActual("correrDerecha");
+			
 		}else {
 			 x+=1;
-			 setAnimacionActual("correrIzquierda");
+
+
 		}
 		if(y>Juego.coordenadaY) {
 			y-=1;
@@ -235,14 +226,15 @@ public class Enemigo1 extends ObjetoJuego {
 			 y+=1;
 			 setAnimacionActual("correrAbajo");
 		}	
+		
+		
 	}
 	
 	public void verificarColisionJugador(Jugador jugador) {
 		if (obtenerRectangulo().getBoundsInLocal().intersects(jugador.obtenerRectangulo().getBoundsInLocal()) ) {
-			jugador.setVidas(jugador.getVidas()-1);
+			jugador.setVidas(jugador.getVidas()-3);
 			setColision(true);
 			this.y=y-900;
-			 
 		}
 		else {
 			setColision(false);

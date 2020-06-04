@@ -32,90 +32,35 @@ public class Enemigo3 extends ObjetoJuego {
 
 	public void inicializarAnimaciones() {
 		
-		//correrDerecha
-						Rectangle coordenadasCorrerIzquierda[]= {
-								new Rectangle(26,893,68,57),
-								new Rectangle(106,892,68,57),
-								new Rectangle(187,892,68,57),
-								new Rectangle(267,891,69,56),
-								new Rectangle(347,894,66,56),
-								new Rectangle(427,893,67,57),
-								new Rectangle(507,893,68,57),
-								new Rectangle(587,892,68,57),
-								new Rectangle(667,894,66,57),
-						};
-						Animacion animacionCorrerIzquierda =new Animacion(0.05, coordenadasCorrerIzquierda);
-						animaciones.put("correrIzquierda", animacionCorrerIzquierda);
-						
-		//correrDerecha
-				Rectangle coordenadasCorrerDerecha[]= {
-						new Rectangle(12,7,66,57),
-						new Rectangle(92,5,68,57),
-						new Rectangle(172,6,68,57),
-						new Rectangle(252,6,67,57),
-						new Rectangle(332,7,66,57),
-						new Rectangle(412,4,69,57),
-						new Rectangle(492,5,68,57),
-						new Rectangle(573,5,68,57),
-						new Rectangle(653,6,68,57),			
-				};
-				Animacion animacionCorrerDerecha =new Animacion(0.05, coordenadasCorrerDerecha);
-				animaciones.put("correrDerecha", animacionCorrerDerecha);
+	
 				
 		//reposo
 				Rectangle CoordenadasReposo[]= {
-						new Rectangle(12,7,66,57)				
+						new Rectangle(0,156,37,34),	
+						new Rectangle(39,156,37,33),		
+						new Rectangle(78,156,37,33),		
+						new Rectangle(120,156,35,34),	
+						new Rectangle(158,159,34,35),	
+						new Rectangle(196,159,34,36),		
+						new Rectangle(237,158,35,34),		
 				};
-				Animacion animacionReposo =new Animacion(1.5, CoordenadasReposo);
+				Animacion animacionReposo =new Animacion(0.05, CoordenadasReposo);
 				animaciones.put("reposo", animacionReposo);
 				
 		//correr arriba
 				Rectangle coordenadasCorrerArriba[]= {
-						new Rectangle(14,487,66,53),
-						new Rectangle(94,487,67,52),
-						new Rectangle(173,486,68,53),
-						new Rectangle(254,487,66,53),
-						new Rectangle(334,487,67,52),
-						new Rectangle(414,486,68,53),		
+						new Rectangle(2,236,35,35),
+						new Rectangle(41,236,35,34),
+						new Rectangle(81,236,35,34),
+						new Rectangle(120,236,35,34),
+						new Rectangle(159,236,35,35),
+						new Rectangle(198,236,35,34),
+						
 				};
 				Animacion animacionCorrerArriba =new Animacion(0.05, coordenadasCorrerArriba);
 				animaciones.put("correrArriba", animacionCorrerArriba);
 				
-		//correr abajo
-				Rectangle coordenadasCorrerAbajo[]= {
-						new Rectangle(491,407,67,58),
-						new Rectangle(571,407,67,58),
-						new Rectangle(651,406,68,58),
-						new Rectangle(731,407,68,58),
-						new Rectangle(811,407,67,58),
-						new Rectangle(892,406,68,58),				
-				};
-				Animacion animacionCorrerAbajo =new Animacion(0.03, coordenadasCorrerAbajo);
-				animaciones.put("correrAbajo", animacionCorrerAbajo);
-				
-		//ataque
-				Rectangle coordenadasAtaque[]= {
-						new Rectangle(11,326,68,55),
-						new Rectangle(93,326,68,52),
-						new Rectangle(169,326,68,53),
-						new Rectangle(253,329,65,57),
-						new Rectangle(332,328,66,57),
-						new Rectangle(411,328,66,58),			
-				};
-				Animacion animacionAtaque =new Animacion(0.03, coordenadasAtaque);
-				animaciones.put("ataque", animacionAtaque);
-				
-		//muerte
-				Rectangle coordenadasMuerte[]= {
-						new Rectangle(491,407,67,58),
-						new Rectangle(571,407,67,58),
-						new Rectangle(651,406,68,58),
-						new Rectangle(731,407,68,58),
-						new Rectangle(811,407,67,58),
-						new Rectangle(892,406,68,58),				
-				};
-				Animacion animacionMuerte =new Animacion(0.03, coordenadasMuerte);
-				animaciones.put("auerte", animacionMuerte);
+	
 				
 			}
 	
@@ -215,6 +160,7 @@ public class Enemigo3 extends ObjetoJuego {
 
 	@Override
 	public void pintar(GraphicsContext graficos) {
+		
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen, yImagen, anchoImagen, altoImagen, x, y, anchoImagen,anchoImagen);		
 		
 	}
@@ -223,17 +169,17 @@ public class Enemigo3 extends ObjetoJuego {
 	public void mover( ) {
 		if(x>Juego.coordenadaX) {
 			x-=1;
-			setAnimacionActual("correrDerecha");
+			
 		}else {
 			 x+=1;
-			 setAnimacionActual("correrIzquierda");
+			
 		}
 		if(y>Juego.coordenadaY) {
 			y-=1;
-			setAnimacionActual("correrArriba");
+			
 		}else {
 			 y+=1;
-			 setAnimacionActual("correrAbajo");
+			 
 		}	
 	}
 	

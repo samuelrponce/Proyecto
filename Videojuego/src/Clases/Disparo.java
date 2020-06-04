@@ -38,7 +38,12 @@ public class Disparo  {
 
 
 	public Rectangle obtenerRectangulo() {
+		if(y>0) {
+			
 		return new Rectangle(x, y-5, anchoImagen-5, altoImagen-5);
+		
+			}
+		return new Rectangle(0,0,0,0);
 	}
 	
 	
@@ -126,6 +131,7 @@ public class Disparo  {
 			setColision(true);
 		} 
 		
+		
 		if (obtenerRectangulo().getBoundsInLocal().intersects(enemigo2.obtenerRectangulo().getBoundsInLocal()) ) {
 			jugador.setPuntuacion(jugador.getPuntuacion()+20);
 			enemigo2.setY(enemigo2.getY()-1000);
@@ -138,6 +144,7 @@ public class Disparo  {
 			enemigo3.setX(enemigo3.getX()-10500);
 			setColision(true);
 		} 
+		
 		
 	}
 
